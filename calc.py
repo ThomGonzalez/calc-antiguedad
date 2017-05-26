@@ -22,11 +22,13 @@ def calc_ant_tiempo(fecha_inicio, fecha_actual):
 	lst_fact = fecha_actual.split('-')
 	lst_fini = fecha_inicio.split('-')
 	
+	anios = int(lst_fact[0]) - int(lst_fini[0])
 	meses = int(lst_fact[1]) - int(lst_fini[1])
 
 	if meses < 0:
 		meses = meses + 12 
-
+		anios = anios - 1
+		
 	return meses
 
 
