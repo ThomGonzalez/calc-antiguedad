@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-def calc_semanas(fecha_inicio, fecha_actual):
+def calc_ant_semanas(fecha_inicio, fecha_actual):
 	"""
 	Cálcula antigüedad en semanas.
 	"""
@@ -15,8 +15,27 @@ def calc_semanas(fecha_inicio, fecha_actual):
 
 	return semanas
 
+def calc_ant_tiempo(fecha_inicio, fecha_actual):
+	"""
+	Cálculo de antiguedad por el timepo transcurrido.
+	"""
+	lst_fact = fecha_actual.split('-')
+	lst_fini = fecha_inicio.split('-')
+	
+	meses = int(lst_fact[1]) - int(lst_fini[1])
+
+	if meses < 0:
+		meses = meses + 12 
+
+	return meses
+
+
 
 fecha_inicio = '1989-11-16'
 fecha_actual = '2017-05-26'
-data = calc_semanas(fecha_inicio, fecha_actual)
-print(data)
+
+semanas = calc_ant_semanas(fecha_inicio, fecha_actual)
+print(semanas)
+
+tiempo = calc_ant_tiempo(fecha_inicio, fecha_actual) 
+print(tiempo)
