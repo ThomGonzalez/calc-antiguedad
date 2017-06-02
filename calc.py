@@ -20,14 +20,15 @@ def calc_weeks(fecha_desde, fecha_hasta):
 	Calculation of seniority in weeks.
 	"""
 	data = {}
-	fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d').date()
-	fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d').date()
-	# Resta numero de dias.
-	numero = (fecha_hasta - fecha_desde)
-	# Obtener número de días, sumar mas 1 y dividir entre 7.
-	semanas = ((numero.days + 1) / 7)
-	semanas = int(semanas)
-	data['weeks'] = semanas
+	if fecha_hasta > fecha_desde:
+		fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d').date()
+		fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d').date()
+		# Resta numero de dias.
+		numero = (fecha_hasta - fecha_desde)
+		# Obtener número de días, sumar mas 1 y dividir entre 7.
+		semanas = ((numero.days + 1) / 7)
+		semanas = int(semanas)
+		data['weeks'] = semanas
 	return data
 
 def calc_days(fecha_desde, fecha_hasta):
@@ -35,22 +36,23 @@ def calc_days(fecha_desde, fecha_hasta):
 	Calculation of seniority for the elapsed time.
 	"""
 	data = {}
-	start_date = to_date(fecha_desde)
-	end_date = to_date(fecha_hasta)
-	first_date = first_day_month(start_date)
-	prev_date = previous_day_month(end_date)
-	
-	days_360 = dias360(fecha_desde=first_date, fecha_hasta=prev_date)
-	day = get_days(fecha_desde=start_date, fecha_hasta=end_date)
-	total_days = days_360 + day
+	if fecha_hasta > fecha_desde:
+		start_date = to_date(fecha_desde)
+		end_date = to_date(fecha_hasta)
+		first_date = first_day_month(start_date)
+		prev_date = previous_day_month(end_date)
+		
+		days_360 = dias360(fecha_desde=first_date, fecha_hasta=prev_date)
+		day = get_days(fecha_desde=start_date, fecha_hasta=end_date)
+		total_days = days_360 + day
 
-	years = int(total_days / 360)
-	months = int((total_days - 360 * years) / 30)
-	days = total_days - (years * 360 + months * 30)
-	
-	data['years'] = years
-	data['months'] = months
-	data['days'] = days
+		years = int(total_days / 360)
+		months = int((total_days - 360 * years) / 30)
+		days = total_days - (years * 360 + months * 30)
+		
+		data['years'] = years
+		data['months'] = months
+		data['days'] = days
 
 	return data
 
