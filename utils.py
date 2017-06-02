@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def check_date(year, month, day):
     correct_date = None
@@ -19,9 +19,20 @@ def is_leap_year(anio=None):
 		bisiesto = True
 	return bisiesto
 
-def string_to_date(str_date):
+def to_date(str_date):
 	"""
 	Convert string to date.
 	"""
 	date = datetime.strptime(str_date, '%Y-%m-%d').date()
+	return date
+
+def first_day_month(fecha_desde):
+	"""
+	Obtiene el primer día del mes del año actual.
+	"""
+	date = fecha_desde.replace(day=1)
+	return date
+
+def previous_day_month(fecha_hasta):
+	date = fecha_hasta - timedelta(days=fecha_hasta.day)
 	return date
