@@ -1,31 +1,6 @@
 from datetime import datetime, timedelta
 from datetime import date
-
-def check_date(year, month, day):
-    correct_date = None
-    try:
-        new_date = datetime(year, month, day)
-        correct_date = True
-    except ValueError:
-        correct_date = False
-    return correct_date
-
-def es_bisiesto(anio=None):
-	"""
-	Valida si el año actual es bisiesto.
-	"""
-	bisiesto = False 
-	# Probamos si el mes de febrero del año actual tiene 29 días 
-	if check_date(anio, 2, 29):
-		bisiesto = True
-	return bisiesto
-
-def string_to_date(str_date):
-	"""
-	Convierte string a fecha.
-	"""
-	date = datetime.strptime(str_date, '%Y-%m-%d').date()
-	return date
+from utils import string_to_date
 
 def calc_ant_semanas(fecha_inicio, fecha_actual):
 	"""
@@ -69,7 +44,6 @@ def dias360(fecha_desde, fecha_hasta):
 
 def get_days(fecha_desde, fecha_hasta):
 	days = (fecha_hasta.day - fecha_desde.day) + 1
-	print(days)
 	return days
 
 def calc_ant_dias(fecha_desde, fecha_hasta):
