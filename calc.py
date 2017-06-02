@@ -1,5 +1,5 @@
-from datetime import datetime
-
+from datetime import datetime, timedelta
+from datetime import date
 
 def check_date(year, month, day):
     correct_date = None
@@ -21,6 +21,12 @@ def es_bisiesto(anio=None):
 		bisiesto = True
 	return bisiesto
 
+def string_to_date(str_date):
+	"""
+	Convierte string a fecha.
+	"""
+	date = datetime.strptime(str_date, '%Y-%m-%d').date()
+	return date
 
 def calc_ant_semanas(fecha_inicio, fecha_actual):
 	"""
@@ -100,11 +106,47 @@ def calc_ant_tiempo(fecha_inicio, fecha_actual):
 	return data
 
 
-fecha_inicio = '2008-03-31'
-fecha_actual = '2009-03-02'
 
-data = calc_ant_semanas(fecha_inicio, fecha_actual)
+def first_day_of_month(year, month):
+	"""
+	Obtiene el primer día del mes y año.
+	"""
+	return date(year, month, 1)
+
+def get_first_day_of_month(fecha_desde):
+	"""
+	Obtiene el primer día del mes del año actual.
+	"""
+	date = fecha_desde.replace(day=1)
+	return date
+
+def get_previous_day_of_month(fecha_hasta):
+	date = fecha_hasta - timedelta(days=fecha_hasta.day)
+	return date
+
+
+def calc_ant_dias(fecha_desde, fecha_hasta):
+	start_date = string_to_date(fecha_desde)
+	end_date = string_to_date(fecha_hasta)
+
+	first_day = get_first_day_of_month(start_date)
+	prev_day = get_previous_day_of_month(end_date)
+
+	numero = (prev_day - first_day)
+	print(numero)
+
+
+
+
+fecha_desde = '1989-11-16'
+fecha_hasta = '2017-06-02'
+
+data = calc_ant_semanas(fecha_desde, fecha_hasta)
 print("Semanas: %s" % data)
 
-data = calc_ant_tiempo(fecha_inicio, fecha_actual) 
+data = calc_ant_tiempo(fecha_desde, fecha_hasta) 
 print("Años: %s Meses: %s Dias: %s" % (data['anios'], data['meses'], data['dias']))
+
+calc_ant_dias(fecha_desde, fecha_hasta)
+
+
