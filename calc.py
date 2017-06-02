@@ -125,15 +125,18 @@ def get_previous_day_of_month(fecha_hasta):
 	return date
 
 def dias360(fecha_desde, fecha_hasta):
-	days = (fecha_hasta.day - fecha_desde.day) 
-	months = (fecha_hasta.month - fecha_desde.month) * 30
-	years = (fecha_hasta.year - fecha_desde.year) * 360 
+	day = (fecha_hasta.day - fecha_desde.day) 
+	month = (fecha_hasta.month - fecha_desde.month) * 30
+	year = (fecha_hasta.year - fecha_desde.year) * 360 
 
-	days_passed =  days + months + years
+	days_passed =  day + month + year
 	days =  (days_passed / 30) * 30
 
 	return days
-	
+
+def get_days(fecha_desde, fecha_hasta):
+	days = (fecha_hasta.day - fecha_desde.day) + 1
+	return days
 
 def calc_ant_dias(fecha_desde, fecha_hasta):
 	start_date = string_to_date(fecha_desde)
@@ -143,7 +146,10 @@ def calc_ant_dias(fecha_desde, fecha_hasta):
 	prev_date = get_previous_day_of_month(end_date)
 	
 	days = dias360(fecha_desde=first_date, fecha_hasta=prev_date)
-	print(days)
+	day = get_days(fecha_desde=start_date, fecha_hasta=end_date)
+
+	total_days = days + day
+	print(total_days)
 
 fecha_desde = '1989-11-16'
 fecha_hasta = '2017-06-02'
