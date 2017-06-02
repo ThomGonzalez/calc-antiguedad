@@ -10,7 +10,6 @@ def check_date(year, month, day):
         correct_date = False
     return correct_date
 
-
 def es_bisiesto(anio=None):
 	"""
 	Valida si el año actual es bisiesto.
@@ -41,71 +40,6 @@ def calc_ant_semanas(fecha_inicio, fecha_actual):
 	semanas = int(semanas)
 
 	return semanas
-
-def calc_ant_tiempo(fecha_inicio, fecha_actual):
-	"""
-	Cálculo de antiguedad por el timepo transcurrido.
-	"""
-
-	data = {}
-
-	lst_fact = fecha_actual.split('-')
-	lst_fini = fecha_inicio.split('-')
-	
-	anios = int(lst_fact[0]) - int(lst_fini[0])
-	meses = int(lst_fact[1]) - int(lst_fini[1])
-	dias = int(lst_fact[2]) - int(lst_fini[2])
-
-	dias_mes_anterior = 0
-	anio_actual = int(lst_fact[0])
-	mes_actual = int(lst_fact[1])
-	# Sumar días mas uno.
-	dias += 1
-	
-	if dias < 0:
-		meses -= 1
-		# Ahora hay que sumar a $dias los dias que tiene el mes anterior de la fecha actual 
-		if mes_actual == 1:
-			dias_mes_anterior = 31
-		elif mes_actual == 2:
-			dias_mes_anterior = 31
-		elif mes_actual == 3:
-			if es_bisiesto(anio=anio_actual):
-				dias_mes_anterior = 29
-			else: 
-				dias_mes_anterior = 28
-		elif mes_actual == 4:
-			dias_mes_anterior = 31
-		elif mes_actual == 5:
-			dias_mes_anterior = 30
-		elif mes_actual == 6:
-			dias_mes_anterior = 31
-		elif mes_actual == 7:
-			dias_mes_anterior = 30
-		elif mes_actual == 8:
-			dias_mes_anterior = 31
-		elif mes_actual == 9:
-			dias_mes_anterior = 31
-		elif mes_actual == 10:
-			dias_mes_anterior = 30
-		elif mes_actual == 11:
-			dias_mes_anterior = 31
-		elif mes_actual == 12:
-			dias_mes_anterior = 30
-
-		dias = dias + dias_mes_anterior
-
-	if meses < 0:
-		meses = meses + 12 
-		anios = anios - 1
-
-	data['anios'] = anios
-	data['meses'] = meses
-	data['dias'] = dias
-		
-	return data
-
-
 
 def first_day_of_month(year, month):
 	"""
@@ -139,6 +73,9 @@ def get_days(fecha_desde, fecha_hasta):
 	return days
 
 def calc_ant_dias(fecha_desde, fecha_hasta):
+	"""
+	Calculation of seniority for the elapsed time.
+	"""
 	data = {}
 	start_date = string_to_date(fecha_desde)
 	end_date = string_to_date(fecha_hasta)
@@ -165,9 +102,6 @@ fecha_hasta = '2017-06-02'
 
 # data = calc_ant_semanas(fecha_desde, fecha_hasta)
 # print("Semanas: %s" % data)
-
-# data = calc_ant_tiempo(fecha_desde, fecha_hasta) 
-# print("Años: %s Meses: %s Dias: %s" % (data['anios'], data['meses'], data['dias']))
 
 data = calc_ant_dias(fecha_desde, fecha_hasta)
 print(data)
