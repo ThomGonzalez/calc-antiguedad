@@ -130,28 +130,37 @@ def dias360(fecha_desde, fecha_hasta):
 	year = (fecha_hasta.year - fecha_desde.year) * 360 
 
 	days_passed =  day + month + year
-	days =  (days_passed / 30) * 30
-
+	days = round((days_passed / 30) * 30)
 	return days
 
 def get_days(fecha_desde, fecha_hasta):
 	days = (fecha_hasta.day - fecha_desde.day) + 1
+	print(days)
 	return days
 
 def calc_ant_dias(fecha_desde, fecha_hasta):
+	data = {}
 	start_date = string_to_date(fecha_desde)
 	end_date = string_to_date(fecha_hasta)
-
 	first_date = get_first_day_of_month(start_date)
 	prev_date = get_previous_day_of_month(end_date)
 	
-	days = dias360(fecha_desde=first_date, fecha_hasta=prev_date)
+	days_360 = dias360(fecha_desde=first_date, fecha_hasta=prev_date)
 	day = get_days(fecha_desde=start_date, fecha_hasta=end_date)
+	total_days = days_360 + day
 
-	total_days = days + day
-	print(total_days)
+	years = int(total_days / 360)
+	months = int((total_days - 360 * years) / 30)
+	days = total_days - (years * 360 + months * 30)
+	
+	data['years'] = years
+	data['months'] = months
+	data['days'] = days
 
-fecha_desde = '1989-11-16'
+	return data
+
+
+fecha_desde = '2015-12-25'
 fecha_hasta = '2017-06-02'
 
 # data = calc_ant_semanas(fecha_desde, fecha_hasta)
@@ -160,6 +169,7 @@ fecha_hasta = '2017-06-02'
 # data = calc_ant_tiempo(fecha_desde, fecha_hasta) 
 # print("Años: %s Meses: %s Dias: %s" % (data['anios'], data['meses'], data['dias']))
 
-calc_ant_dias(fecha_desde, fecha_hasta)
+data = calc_ant_dias(fecha_desde, fecha_hasta)
+print(data)
 
 
