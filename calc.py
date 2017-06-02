@@ -15,21 +15,21 @@ def dias360(fecha_desde, fecha_hasta):
 	days = round((days_passed / 30) * 30)
 	return days
 
-def calc_weeks(fecha_inicio, fecha_actual):
+def calc_weeks(fecha_desde, fecha_hasta):
 	"""
 	Calculation of seniority in weeks.
 	"""
 	data = {}
-	fecha_inicio = datetime.strptime(fecha_inicio, '%Y-%m-%d').date()
-	fecha_actual = datetime.strptime(fecha_actual, '%Y-%m-%d').date()
+	fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d').date()
+	fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d').date()
 	# Resta numero de dias.
-	numero = (fecha_actual - fecha_inicio)
+	numero = (fecha_hasta - fecha_desde)
 	# Obtener número de días, sumar mas 1 y dividir entre 7.
 	semanas = ((numero.days + 1) / 7)
 	semanas = int(semanas)
 	data['weeks'] = semanas
 	return data
-	
+
 def calc_days(fecha_desde, fecha_hasta):
 	"""
 	Calculation of seniority for the elapsed time.
