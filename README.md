@@ -1,11 +1,8 @@
-# Cálculo de antiguedad
+# Cálculo de antigüedad
 
-Cálculo de antiguedad: 
+Cálculo de antigüedad: 
 
-1.- En semanas.
-2.- Años,
-3.- Meses
-4.- días.
+* En semanas, años, meses y días.
 
 # Ejemplo:
 
