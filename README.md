@@ -4,6 +4,7 @@
 * Calculate years elapsed between two dates.
 * Calculate months elapsed between two dates.
 * To calculate the number of weeks between two dates we will start from the number of days we previously calculated taking this value we divide it between 7.
+* Calculate age with date of birth.
 
 # Example:
 
