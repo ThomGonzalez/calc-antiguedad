@@ -1,12 +1,13 @@
-# Cálculo de antigüedad
+# Calculation of seniority
 
-Cálculo de antigüedad: 
+* Calcule weeks, years, month and days.
+* Calculate years elapsed between two dates.
+* Calculate months elapsed between two dates.
+* To calculate the number of weeks between two dates we will start from the number of days we previously calculated taking this value we divide it between 7.
 
-* En semanas, años, meses y días.
+# Example:
 
-# Ejemplo:
-
-fecha_desde = '2015-12-25'
+fecha_desde = '2015-12-25'<br>
 fecha_hasta = '2017-06-02'
 
 data = calc_weeks(fecha_desde, fecha_hasta)
